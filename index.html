@@ -5,6 +5,34 @@
     <link rel="shortcut icon" href="http://bit.ly/ghfavicon" width=32px>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
     <meta charset="UTF-8">
+    <script>
+        onload = function() {
+            cv = document.querySelector('#cvl'),
+            ctx = cv.getContext('2d');
+            if (!!ctx) {
+                C3qπ = 1.5 * Math.PI, // starting position[angle] for circle drawing
+                tc = pct = 0,
+                lnk = document.querySelector('link[rel*="icon"]');
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = 'fuchsia';
+                tc = setInterval(updateLoader, 60);
+            }
+        };
+        function updateLoader() {
+            with(ctx) {
+                clearRect(0, 0, 16, 16);
+                beginPath();
+                arc(8, 8, 6, C3qπ, (pct * 2 * Math.PI / 100 + C3qπ));
+                stroke();
+            }
+            lnk.href= cv.toDataURL('image/png'); // update favicon
+            if (pct === 100) {
+                clearInterval(tc);
+                return;
+            }
+            pct++;
+        }
+    </script>
     <title>Canvas-Favicon Circular Loader</title>
     <style>
         .btn {
@@ -41,9 +69,13 @@
             font-family: 'Crimson Text';
             font-size: 14pt;
         }
+        #cvl {
+            opacity: 0;
+        }
     </style>
 </head>
-
 <body style="text-align: center;">
+    <canvas id=cvl width=16 height=16></canvas>
 </body>
+
 </html>
