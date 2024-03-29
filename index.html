@@ -11,7 +11,7 @@ onload = function() {
         var C3qπ = 1.5 * Math.PI;
         ctx.lineWidth = 5;
         ctx.strokeStyle = '#b72026';
-        tc = setInterval(updateLoader, 10);
+        tc = setInterval(updateLoader, 1);
     }
     function updateLoader() {
         if (!document.hidden) {
@@ -31,18 +31,16 @@ onload = function() {
             if (pct === 0) {
                 clearInterval(tc);
                 setTimeout(function() {
-                    tc = setInterval(updateLoader, 10);
+                    tc = setInterval(updateLoader, 1);
                 }, 1000);
             }
         }
     }
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            tc = setInterval(updateLoader, 10);  
-            // Start animation when tab becomes inactive
+            tc = setInterval(updateLoader, 1);  
         } else {
             clearInterval(tc);  
-            // Stop animation when tab becomes active
             lnk.href = 'https://uc.knu.ua/images/logo.png';
         }
     });
