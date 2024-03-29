@@ -1,0 +1,35 @@
+<html>
+<head>
+    <link rel="shortcut icon" href="http://bit.ly/ghfavicon" width=32px>
+    <script>
+    onload = function() {
+    cv = document.querySelector('#cvl'),
+    ctx = cv.getContext('2d');
+  if (!!ctx) {
+    C3qπ = 1.5 * Math.PI,
+    tc = pct = 0,
+    lnk = document.querySelector('link[rel*="icon"]');
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'fuchsia';
+    tc = setInterval(updateLoader, 60);
+}
+};
+function updateLoader() {
+    with(ctx) {
+        clearRect(0, 0, 16, 16);
+        beginPath();
+        moveTo(8, 4);
+        bezierCurveTo(8, 0, 16, 0, 16, 4);
+        bezierCurveTo(16, 8, 8, 12, 8, 16);
+        bezierCurveTo(0, 12, 0, 8, 8, 4);
+        stroke();
+    }
+    lnk.href= cv.toDataURL('image/png');
+    pct = (pct + 1) % 100; // 
+}
+    </script>
+</head>
+<body>
+    <canvas id=cvl width=16 height=16 style="opacity: 0;"></canvas>
+</body>
+</html>
