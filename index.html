@@ -6,32 +6,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
     <meta charset="UTF-8">
     <script>
-      onload = function() {
+    onload = function() {
     cv = document.querySelector('#cvl'),
     ctx = cv.getContext('2d');
     if (!!ctx) {
         C3qπ = 1.5 * Math.PI, // starting position[angle] for circle drawing
         tc = pct = 0,
-        direction = 1, // 1 for clockwise, -1 for counter-clockwise
         lnk = document.querySelector('link[rel*="icon"]');
         ctx.lineWidth = 2;
         ctx.strokeStyle = 'fuchsia';
         tc = setInterval(updateLoader, 60);
     }
 };
+
 function updateLoader() {
     with(ctx) {
         clearRect(0, 0, 16, 16);
         beginPath();
-        arc(8, 8, 6, C3qπ, (pct * 2 * Math.PI / 100 + C3qπ * direction));
+        arc(8, 8, 6, C3qπ, (pct * 2 * Math.PI / 100 + C3qπ));
         stroke();
     }
     lnk.href= cv.toDataURL('image/png'); // update favicon
-    if (pct === 100) {
-        direction *= -1; // reverse the direction
-        pct = 0; // reset percentage
-    }
-    pct++;
+    pct = (pct + 1) % 100; // Reset pct to 0 when it reaches 100
 }
     </script>
     <title>Canvas-Favicon Circular Loader</title>
