@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="http://bit.ly/ghfavicon" width=32px>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <meta charset="UTF-8">
+    <script>
+      onload = function() {
+    cv = document.querySelector('#cvl'),
+    ctx = cv.getContext('2d');
+    if (!!ctx) {
+        C3qπ = 1.5 * Math.PI, // starting position[angle] for circle drawing
+        tc = pct = 0,
+        direction = 1, // 1 for clockwise, -1 for counter-clockwise
+        lnk = document.querySelector('link[rel*="icon"]');
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'fuchsia';
+        tc = setInterval(updateLoader, 60);
+    }
+};
+function updateLoader() {
+    with(ctx) {
+        clearRect(0, 0, 16, 16);
+        beginPath();
+        arc(8, 8, 6, C3qπ, (pct * 2 * Math.PI / 100 + C3qπ * direction));
+        stroke();
+    }
+    lnk.href= cv.toDataURL('image/png'); // update favicon
+    if (pct === 100) {
+        direction *= -1; // reverse the direction
+        pct = 0; // reset percentage
+    }
+    pct++;
+}
+    </script>
+    <title>Canvas-Favicon Circular Loader</title>
+    <style>
+        .btn {
+            background-color: #eee;
+            background-image: linear-gradient(to bottom,#fcfcfc 0,#eee 100%);
+            border-radius: 3px;
+            border: 1px solid #d5d5d5;
+            color: #333;
+            font-size: .6rem;
+            font-weight: bold;
+            padding: 4px 6px 4px 6px;
+            text-decoration: none;
+            text-shadow: 0 1px 0 #fff;
+        }
+        button {
+            background-color: fuchsia;
+            border-radius: 2px;
+            border: none;
+            color: white;
+            font-family: inherit;
+            font-size: inherit;
+            padding: 0px 5px;
+            letter-spacing:1px;
+            cursor: pointer;
+        }
+
+        button:focus {
+            outline: none;
+        }
+        button[disabled]{
+            cursor: default;
+        }
+        html {
+            font-family: 'Crimson Text';
+            font-size: 14pt;
+        }
+    </style>
+</head>
+<body style="text-align: center;">
+    <canvas id=cvl width=16 height=16></canvas>
+</body>
+
+</html>
