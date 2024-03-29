@@ -1,0 +1,54 @@
+<html>
+<head>
+    <script>
+onload = function() {
+    var cv = document.querySelector('#cvl'),
+        ctx = cv.getContext('2d'),
+        tc, pct = 0,
+        lnk = document.querySelector('link[rel*="icon"]');
+    if (!!ctx) {
+        var C3qπ = 1.5 * Math.PI;
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#b72026';
+        tc = setInterval(updateLoader, 10);
+    }
+    function updateLoader() {
+        if (!document.hidden) {
+            lnk.href = 'https://uc.knu.ua/images/logo.png';
+        } else {
+            with(ctx) {
+                clearRect(0, 0, 16, 16);
+                beginPath();
+                arc(8, 8, 6, C3qπ, (pct * 2 * Math.PI / 100 + C3qπ));
+                stroke();
+                fillStyle = 'white';
+                fill();
+            }
+            lnk.href = cv.toDataURL('image/png');
+            pct = (pct + 1) % 100;
+
+            if (pct === 0) {
+                clearInterval(tc);
+                setTimeout(function() {
+                    tc = setInterval(updateLoader, 10);
+                }, 1000);
+            }
+        }
+    }
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            tc = setInterval(updateLoader, 10);  
+            // Start animation when tab becomes inactive
+        } else {
+            clearInterval(tc);  
+            // Stop animation when tab becomes active
+            lnk.href = 'https://uc.knu.ua/images/logo.png';
+        }
+    });
+};
+    </script>
+</head>
+<body>
+    <canvas id=cvl width=16 height=16 style="opacity: 0;"></canvas>
+</body>
+</html>
